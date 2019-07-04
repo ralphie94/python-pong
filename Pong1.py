@@ -31,6 +31,8 @@ ball.color("white")
 ball.shape("square")
 ball.penup()
 ball.goto(0, 0) # Sets ball in the middle
+ball.dx = 2 # Everytime ball moves, it moves by 2 pixels
+ball.dy = -2
 
 # Functions
 def paddle_a_up():
@@ -63,3 +65,24 @@ wn.onkeypress(paddle_b_down, "Down")
 # Main game loop
 while True:
     wn.update()
+
+    # Move the ball
+    ball.setx(ball.xcor() + ball.dx)
+    ball.sety(ball.ycor() + ball.dy)
+
+    # Border check
+    if ball.ycor() > 290:
+        ball.sety(290)
+        ball.dy *= -1 # Reverses the direction
+
+    if ball.ycor() < -290:
+        ball.sety(-290)
+        ball.dy *= -1 
+
+    if ball.xcor() > 390:
+        ball.goto(0, 0)
+        ball.dx *= -1
+
+    if ball.xcor() < -390:
+        ball.goto(0, 0)
+        ball.dx *= -1
